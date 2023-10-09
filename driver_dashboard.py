@@ -14,13 +14,15 @@ class DriverDashboard:
     WINDOW_MARGIN_BOTTOM = 10
     WINDOW_PADDING_X = 10
     
-    def __init__(self, drone: TimedTello):
+    DEV_SERVER_PORT = 5173
+    
+    def __init__(self, drone: TimedTello, dev_server=False, dev_server_port=DEV_SERVER_PORT):
         self.drone = drone
-
         monitor = self.__get_primary_monitor()
+
         self.control_window = webview.create_window(
             title="FlyLib Driver Dashboard Controls",
-            url="controls.html",
+            url=f"http://localhost:{str(dev_server_port)}/controls" if dev_server else "controls.html",
             resizable=True,
             frameless=True,
             easy_drag=True,
@@ -34,7 +36,7 @@ class DriverDashboard:
         
         self.control_window = webview.create_window(
             title="FlyLib Driver Dashboard Telemetry",
-            url="telemetry.html",
+            url=f"http://localhost:{str(dev_server_port)}/telemetry" if dev_server else "telemetry.html",
             resizable=True,
             x=monitor.x - (self.WINDOW_PADDING_X // 2),
             y=0,

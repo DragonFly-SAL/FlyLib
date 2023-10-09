@@ -1,7 +1,9 @@
 export default function Control() {
     return (
-        <div>
-            <h1>Control</h1>
+        <div className="fixed w-full h-full bg-bg">
+            <div className="tabs h-full w-7">
+                
+            </div>
         </div>
     )
 }
